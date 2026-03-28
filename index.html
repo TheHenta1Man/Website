@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>croco.stitches</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Background plaid -->
+  <div class="bg-plaid"></div>
+
+  <!-- Floating leaves -->
+  <div class="leaves" aria-hidden="true">
+    <span class="leaf leaf-1">🍃</span>
+    <span class="leaf leaf-2">🌿</span>
+    <span class="leaf leaf-3">🍃</span>
+    <span class="leaf leaf-4">🌿</span>
+    <span class="leaf leaf-5">🍃</span>
+  </div>
+
+  <main class="card-wrapper">
+    <div class="card" id="profileCard">
+
+      <!-- Top bar -->
+      <header class="card-header">
+        <button class="icon-btn back-btn" aria-label="Go back" title="Back">&#8592;</button>
+        <span class="username">croco.stitches</span>
+        <button class="icon-btn menu-btn" aria-label="Menu" id="menuBtn">&#8801;</button>
+      </header>
+
+      <!-- Dropdown menu -->
+      <div class="dropdown" id="dropdown" role="menu" aria-hidden="true">
+        <a href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener">🌐 Visit Website</a>
+        <button onclick="shareProfile()">📤 Share Profile</button>
+        <button onclick="copyUsername()">📋 Copy Username</button>
+      </div>
+
+      <!-- Profile section -->
+      <section class="profile-section">
+        <div class="avatar-wrap">
+          <div class="avatar" aria-label="croco.stitches avatar">
+            <img src="logo.jpeg" alt="croco.stitches frog logo" class="logo-img" />
+          </div>
+          <div class="avatar-ring"></div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-num" id="postsCount">118</span>
+            <span class="stat-label">posts</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" id="followersCount">800</span>
+            <span class="stat-label">Followers</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" id="followingCount">112</span>
+            <span class="stat-label">Following</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bio -->
+      <div class="bio">
+        <p><strong>seedy</strong> <span class="pronouns">she/her</span></p>
+        <p>yarn <a href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener" class="bio-link">gremlin</a> with a hook 🧶</p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-btns">
+        <button class="btn btn-follow" id="followBtn" onclick="toggleFollow()">
+          <span id="followLabel">following</span>
+        </button>
+        <button class="btn btn-message" onclick="openMessage()">
+          <span>message</span>
+        </button>
+      </div>
+
+      <!-- Highlights -->
+      <div class="highlights">
+        <a class="highlight" href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener" aria-label="Intro highlight">
+          <div class="highlight-circle" style="--h-color: #a8c8a0;">
+            <span class="highlight-emoji">👋</span>
+          </div>
+          <span class="highlight-label">intro</span>
+        </a>
+        <a class="highlight" href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener" aria-label="Info highlight">
+          <div class="highlight-circle" style="--h-color: #7dce2e;">
+            <span class="highlight-emoji">ℹ️</span>
+          </div>
+          <span class="highlight-label">info</span>
+        </a>
+        <a class="highlight" href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener" aria-label="Custom highlight">
+          <div class="highlight-circle" style="--h-color: #5a9e5a;">
+            <span class="highlight-emoji">🧶</span>
+          </div>
+          <span class="highlight-label">Custom</span>
+        </a>
+        <a class="highlight" href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener" aria-label="Website highlight">
+          <div class="highlight-circle" style="--h-color: #3b6b3b;">
+            <span class="highlight-emoji">🌐</span>
+          </div>
+          <span class="highlight-label">Website</span>
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <footer class="card-footer">
+        <a href="https://crocostitches.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener">( Made with Carrd )</a>
+      </footer>
+
+    </div><!-- /.card -->
+  </main>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <!-- Message modal -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Send message">
+    <div class="modal">
+      <button class="modal-close" onclick="closeMessage()" aria-label="Close">✕</button>
+      <h2>Message <span>croco.stitches</span></h2>
+      <textarea id="msgText" placeholder="Say hi to seedy! 🐸" rows="4"></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-follow" onclick="sendMessage()">Send 🧶</button>
+        <button class="btn btn-message" onclick="closeMessage()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
